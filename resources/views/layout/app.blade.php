@@ -4,8 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    @stack('styles')
     <link rel="icon" href="{{ asset('favicon.ico') }}">
     @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
 
     <title>Laravel</title>
 
@@ -30,10 +32,14 @@
                         </svg>
                         Crear publicación
                     </a>
+
+                    <a class="font-bold text-gray-600 text-sm" href="{{ route('posts.index', auth()->user()->username) }}">
+                        Hola: <span class="font-normal">{{ auth()->user()->username }}</span>
+                    </a>
                     <form class="flex items-center m-0" method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="font-bold uppercase text-gray-600 text-sm">
-                            Hola: <span class="font-normal">{{ auth()->user()->username }}</span> Cerrar sesión
+                            Cerrar sesión
                         </button>
                     </form>
                 @endauth

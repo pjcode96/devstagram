@@ -16,6 +16,10 @@ class PostController extends Controller
     }
 
     public function create(){
-        dd('Creating new post');
+        return view('posts.create');
+    }
+
+    public function store(Request $request){
+        
     }
 }
