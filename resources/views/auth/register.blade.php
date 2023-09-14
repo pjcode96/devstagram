@@ -10,7 +10,7 @@
         </div>
 
         <div class="md:w-5/12 bg-white p-6 rounded-lg shadow-md">
-            <form action="{{ roture('register') }}" method="POST" class="md:w-11/12 mx-auto">
+            <form action="{{ route('register') }}" method="POST" class="md:w-11/12 mx-auto">
                 @csrf
                 <div class="mb-5">
                     <label for="name" class="mb-2 block uppercase text-gray-500 font-bold">

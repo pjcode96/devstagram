@@ -44,7 +44,7 @@
                 @endauth
 
                 @guest
-                    <a class="font-bold uppercase text-gray-600 text-sm" href="/login">
+                    <a class="font-bold uppercase text-gray-600 text-sm" href="{{ route('login') }}">
                         Login
                     </a>
                     <a class="font-bold uppercase text-gray-600 text-sm" href="{{ route('register') }}">

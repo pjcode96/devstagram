@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use App\Models\Post;
+use App\Models\Comment;
+use Illuminate\Http\Request;
+
+class CommentController extends Controller
+{
+    public function store(Request $request, User $user, Post $post)
+    {
+
+        $this->validate($request, [
+            "comment" => ['required', 'max:255']
+        ]);
+
+        Comment::create([
+            "content" => $request->comment,
+            "user_id" => auth()->user()->id,
+            "post_id" => $post->id,
+        ]);
+
+        return back()->with('message', 'Comentario almacenado correctamente');
+    }
+}
