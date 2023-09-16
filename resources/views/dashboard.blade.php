@@ -31,17 +31,40 @@
                 </div>
 
                 <p class="text-gray-800 text-sm mt-5 mb-3 font-bold">
-                    0
-                    <span class="font-normal">Seguidores</span>
+                    {{ $user->followers->count() }}
+                    <span class="font-normal">@choice('Seguidor|Seguidores', $user->followers->count())</span>
                 </p>
                 <p class="text-gray-800 text-sm mb-3 font-bold">
-                    0
+                    {{ $user->following->count() }}
                     <span class="font-normal">Siguiendo</span>
                 </p>
                 <p class="text-gray-800 text-sm mb-3 font-bold">
                     {{ $user->posts->count() }}
                     <span class="font-normal">Post</span>
                 </p>
+
+                @auth
+                    @if ($user->followedByCurrentUser())
+                        <form action="{{ route('users.unfollow', $user) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            @if (auth()->user()->id !== $user->id)
+                                <input
+                                    class="bg-red-600 text-center text-white uppercase rounded-lg px-5 py-3 text-xs font-bold cursor-pointer hover:bg-indigo-600 transition-colors"
+                                    value="dejar de seguir" type="submit">
+                            @endif
+                        </form>
+                    @else
+                        <form action="{{ route('users.follow', $user) }}" method="POST">
+                            @csrf
+                            @if (auth()->user()->id !== $user->id)
+                                <input
+                                    class="bg-blue-600 text-center text-white uppercase rounded-lg px-5 py-3 text-xs font-bold cursor-pointer hover:bg-indigo-600 transition-colors"
+                                    value="seguir" type="submit">
+                            @endif
+                        </form>
+                    @endif
+                @endauth
             </div>
         </div>
     </div>
